@@ -1,0 +1,48 @@
+{
+  "guildId": "",
+  "adminRoleId": "1469421167898263572",
+  "falkaTagRoleId": "1469420752502657197",
+  "verifyMessageId": "1469447118388203590",
+  "adminVoteChannelId": "",
+  "adminLogChannelId": "",
+  "welcomeChannelId": "",
+  "notificationFallbackChannelId": "",
+  "sendVerificationSuccess": true,
+  "sendRejectedPromotionNotice": false,
+  "accessRoleIds": [],
+  "tierRoles": {
+    "1": "",
+    "2": "",
+    "3": "",
+    "4": "",
+    "5": ""
+  },
+  "thresholds": {
+    "1": 0,
+    "2": 250,
+    "3": 750,
+    "4": 1500,
+    "5": 3000
+  },
+  "activity": {
+    "messageXp": 2,
+    "replyXp": 4,
+    "imageXp": 8,
+    "vcMinuteXp": 1,
+    "messageCooldownSeconds": 60,
+    "imageCooldownSeconds": 180,
+    "replyCooldownSeconds": 90
+  },
+  "decay": {
+    "decayEnabled": true,
+    "decayIntervalHours": 24,
+    "decayAmount": 25,
+    "inactivityGraceDays": 14,
+    "demotionMode": "vote",
+    "minimumTier": 1
+  },
+  "forcedTierGraceDays": 30,
+  "vote": {
+    "expiresHours": 72
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "falkabot-tiering",
+  "version": "1.0.0",
+  "description": "Discord.js v14 tiering bot with verification, activity XP, decay, votes, and admin controls.",
+  "main": "src/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "backfill:verified": "node scripts/backfillVerified.js",
+    "sync:tier1-reactors": "node scripts/syncTierOneReactors.js"
+  },
+  "engines": {
+    "node": ">=18.17"
+  },
+  "dependencies": {
+    "better-sqlite3": "^11.9.1",
+    "discord.js": "^14.16.3",
+    "dotenv": "^16.4.7"
+  }
+}

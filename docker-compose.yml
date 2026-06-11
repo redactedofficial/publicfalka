@@ -1,0 +1,10 @@
+services:
+  falkabot:
+    build: .
+    container_name: falkabot
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./config.json:/app/config.json:ro
+      - ./data:/app/data
