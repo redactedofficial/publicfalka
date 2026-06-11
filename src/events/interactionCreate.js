@@ -19,7 +19,9 @@ module.exports = async function interactionCreate(interaction) {
       if (ageMs > 2500) {
         console.warn(`[interaction] stale-before-defer command=${interaction.commandName} ageMs=${ageMs}`);
       }
-      await interaction.deferReply(command.ephemeral === false ? {} : { flags: MessageFlags.Ephemeral });
+      await interaction.reply(command.ephemeral === false
+        ? { content: 'Processing...' }
+        : { content: 'Processing...', flags: MessageFlags.Ephemeral });
       await command.execute(interaction);
       return;
     }
