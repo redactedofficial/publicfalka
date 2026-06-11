@@ -5,11 +5,14 @@ const {
   REST,
   Routes
 } = require('discord.js');
+const dns = require('dns');
 const config = require('./config');
 require('./database');
 const commands = require('./commands');
 const scheduler = require('./scheduler');
 const logger = require('./utils/logger');
+
+dns.setDefaultResultOrder('ipv4first');
 
 const client = new Client({
   intents: [
@@ -24,7 +27,12 @@ const client = new Client({
 });
 
 client.once('clientReady', async () => {
-  logger.info(`Logged in as ${client.user.tag}`);
+  logger.info(`Logged in as ${client.user.tag}`, {
+    botUserId: client.user.id,
+    applicationId: client.application?.id || null,
+    configuredClientId: config.clientId,
+    clientIdMatchesBot: client.user.id === config.clientId || client.application?.id === config.clientId
+  });
   scheduler.startScheduler(client);
 });
 

@@ -3,8 +3,11 @@ services:
     build: .
     container_name: falkabot
     restart: unless-stopped
+    network_mode: host
     env_file:
       - .env
+    environment:
+      NODE_OPTIONS: --dns-result-order=ipv4first
     volumes:
       - ./config.json:/app/config.json:ro
       - ./data:/app/data

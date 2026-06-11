@@ -3,30 +3,6 @@ const voteService = require('../services/voteService');
 const roleService = require('../services/roleService');
 const { MessageFlags } = require('discord.js');
 
-async function rawInitialReply(interaction, options) {
-  const data = {
-    content: options.content || 'Processing...'
-  };
-  if (options.flags) data.flags = options.flags;
-
-  const response = await fetch(`https://discord.com/api/v10/interactions/${interaction.id}/${interaction.token}/callback`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ type: 4, data })
-  });
-
-  if (!response.ok) {
-    const body = await response.text().catch(() => '');
-    throw new Error(`Raw interaction callback failed status=${response.status} body=${body}`);
-  }
-
-  interaction.replied = true;
-  interaction.editReply = (payload) => {
-    const message = typeof payload === 'string' ? { content: payload } : payload;
-    return interaction.webhook.editMessage('@original', message);
-  };
-}
-
 module.exports = async function interactionCreate(interaction) {
   try {
     if (interaction.isChatInputCommand()) {
@@ -43,7 +19,7 @@ module.exports = async function interactionCreate(interaction) {
       if (ageMs > 2500) {
         console.warn(`[interaction] stale-before-defer command=${interaction.commandName} ageMs=${ageMs}`);
       }
-      await rawInitialReply(interaction, command.ephemeral === false
+      await interaction.reply(command.ephemeral === false
         ? { content: 'Processing...' }
         : { content: 'Processing...', flags: MessageFlags.Ephemeral });
       await command.execute(interaction);
